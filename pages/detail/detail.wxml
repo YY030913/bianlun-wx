@@ -1,0 +1,242 @@
+<import src="../../wxParse/wxParse.wxml" />
+<view class="mask" style="display: {{showMask}}" bindtap="cleartap">
+</view>
+<view class="debate">
+    <view style="position: fixed;top: 0;width: 100%;z-index: 10;">
+        <view class="header-title">
+            <view class="red" style="width: {{redWidth}}">
+                    红方论点
+            </view>
+            <view class="triangle">
+            </view>
+            <view class="blue" style="width: {{blueWidth}}">
+                    蓝方论点
+            </view>
+        </view>
+        <view class="header-title-show-bli highlight" bindtap="tapCallButton">
+            <view class="header-title-show-trapezoid">
+            </view>
+
+            <view class="header-title-show-triangle">
+            </view>
+        </view>
+    </view>
+
+    
+    <view class="circle-header-view" style="display: {{showCallPanel}}">
+
+        <view class="circle-red" style="display: none">
+            
+            <view class="wave">
+            </view>
+            <view class="txt">
+                <view>
+                    <text>
+                        红方论点
+                    </text>
+                    <text>
+                        支持率（支持数）
+                    </text>
+                </view>
+                <view>
+                    <text>
+                        蓝方论点
+                    </text>
+                    <text>
+                        支持率（支持数）
+                    </text>
+                </view>
+            </view>
+            
+        </view>
+        <view class="taiji">
+            
+            <view class="tj_1 tj_big1">
+            </view>
+            <view class="tj_1 tj_big2">
+                
+            </view>
+            <view class="tj_2 tj_s1">
+                <view class="tj_ss tj_w">
+                </view>
+            </view>
+            <view class="tj_2 tj_s2">
+                <view class="tj_ss tj_b">
+                </view>
+            </view>
+            <view class="txt">
+                <view class="red-group">
+                    <text>
+                        支持率（支持数）
+                    </text>
+                </view>
+                <view class="blue-group">
+                    <text>
+                        支持率（支持数）
+                    </text>
+                </view>
+            </view>
+        </view>
+        <text class="tip">点击支持的阵营，为他／她们打call</text>
+    </view>
+
+    <scroll-view scroll-y="true" scroll-top="100000000000000000" style="height:100%;padding-bottom: 48px;background:#eee;position: absolute;top: 0;" animation="{{animation_2}}">
+        <view wx:for="{{message}}" wx:for-item="i" wx:key="{{i}}">
+            <view class="padding clearfix" wx:if="{{i.u._id == '12'}}">
+                <image class="right-Avatar padding_half" src="http://127.0.0.1:3000/avatar/{{i.u.username}}"></image>
+                <view class="right-Triangle"></view>
+                <view class="right-message padding_half">
+                    <text wx:if="{{i.text}}">{{i.text}}</text>
+                    <image wx:if="{{i.imgList}}" style="max-width:150px;max-height:120px" src="{{i.imgList}}"></image>
+                    <map wx:if="{{i.map}}" style="width: 220px; height: 160px;"
+                        latitude="{{latitude}}"
+                        longitude="{{longitude}}"
+                        scale="16"
+                        markers="{{markers}}"
+                        covers="{{covers}}"
+                        >
+                    </map>
+                </view>
+            </view>
+            <view class="padding clearfix" wx:if="{{i.u._id != '12'}}">
+                <image class="left-Avatar padding_half" src="http://127.0.0.1:3000/avatar/{{i.u.username}}"></image>
+                <view class="left-Triangle"></view>
+                <view class="left-message padding_half">
+                    <text>{{i.text}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="weui-icon_success"></view>
+    </scroll-view>
+
+    <view class="bottom-poup-view" style="display: {{showAboutPanel}}">
+        <view class="nav">
+            <view class="{{navIndex==0?'nav_select':''}}" bindtap="changeNav" data-index="0">精选</view>
+            <view class="{{navIndex==1?'nav_select':''}}" bindtap="changeNav" data-index="1">简介</view>
+        </view>
+        <view class="main">
+            <swiper bindchange="swiperChange" current="{{navIndex}}">
+                <swiper-item>
+                  <scroll-view scroll-y class="iScroll" bindscrolltoupper="refresh" style="height:100%">
+                    <view wx:for="{{List1}}" wx:key="imgSrc" class="list">
+                        <view style="display: flex;">
+                            <view class="user">
+                                <image class="avatar" mode="aspectFit" src="http://fanyi.bdstatic.com/static/translation/img/header/logo_cbfea26.png"></image>
+                                <view class="username">
+                                    <text class="label">姓名</text>
+                                    <text class="info">论句内容</text>
+                                </view>
+                            </view>
+                        </view>
+                        <text style="display: flex;color: #dedede;">点赞数</text>
+                    </view> 
+                     </scroll-view>
+                </swiper-item>
+                <swiper-item>
+                  <scroll-view scroll-y class="iScroll" bindscrolltoupper="refresh" style="height:100%">
+                    <view class="abstract-debate content" style="display:none">
+                        <view class="owner">
+                            <view class="user">
+                                <image class="avatar" mode="aspectFit" src="http://fanyi.bdstatic.com/static/translation/img/header/logo_cbfea26.png"></image>
+                                <view class="username">
+                                    <text class="label">发起人</text>
+                                    <text class="info">姓名</text>
+                                </view>
+                            </view>
+                            <view class="createtime">
+                                <text class="label">发起时间：</text>
+                                <text class="info">2018-08-05</text>
+                            </view>
+                        </view>
+                        <view style="margin-top: 10px;width:100%;height:1px;background:#000;"></view>
+                        <view class="detail">
+                            <view class="detail-item" style="color:#FF3300">
+                                <text class="red-label">红方论点：</text>我说的都对
+                            </view>
+                            <view class="detail-item" style="color:#0033FF">
+                                <text class="blue-label">蓝方论点：</text>WODEDOUCUO
+                            </view>
+                            <view>
+                                <text>论句内容：</text>
+                                <text>
+                                    FDAFKDSAJFJDSI
+                                    FDAFKDSAJFJDSI
+                                    FDAFKDSAJFJDSI
+                                    FDAFKDSAJFJDSI
+                                    FDAFKDSAJFJDSI
+                                    FDAFKDSAJFJDSI
+                                    FDAFKDSAJFJDSI
+                                    FDAFKDSAJFJDSI
+                                    FDAFKDSAJFJDSI
+                                    FDAFKDSAJFJDSI
+                                    FDAFKDSAJFJDSI
+                                    FDAFKDSAJFJDSI
+                                </text>
+                            </view>
+                        </view>
+                    </view>
+                     </scroll-view>
+                </swiper-item>
+            </swiper>
+        </view>
+    </view>
+    
+    <view style="position: fixed;bottom: 0;left: 0;">
+        <view class="wa-row" style="height:48px;background:#f3f3f3;border:1px solid #ccc;">
+            <view class="text-center icon ion-ios-mic" style="font-size:14px;padding-left:10px;padding-right:10px;border-right: 1px solid #ccc;width: 30px;" bindtap="getAboutPanel">
+                <text style="font-size:14px;color:#444;height: 48px;line-height: 48px;">关于</text>
+            </view>
+            <view class="padding_half" style="border-right: 1px solid #ccc;">
+                <input placeholder="请输入消息" style="border-bottom:1px solid green;margin-left:10px;margin-right:10px;line-height:32px;height:32px;margin-top:6px;" bindinput="inputfun" />
+            </view>
+            <view class="text-center icon ion-happy-outline" style="font-size:14px;padding-left:10px;padding-right:10px;border-right: 1px solid #ccc;width: 30px;" bindtap="sendMessage">
+                <text style="font-size:14px;color:#444;height: 48px;line-height: 48px;">发送</text>
+            </view>
+            <view class="text-center icon ion-ios-plus-outline text-center" style="line-height:30px;width: 30px;" bindtap="showElseBtn">
+                <text style="font-size:14px;color:#444;height: 48px;line-height: 48px;">+</text>
+            </view>
+        </view>
+        <view id="elsePanel" animation="{{animation}}" style="display: {{showElsePanel}}">
+            <view class="wa-row">
+                <view class="wa-col-33" bindtap="chooseImg">
+                    <view class="text-center" style="display:flex;flex-direction:column;margin-top: 10px;margin-bottom: 10px;">
+                        <i class="fa fa-picture-o" style="font-size: 50px;"/>
+                        <text style="margin-top: 10px;">图片</text>
+                    </view>
+                </view>
+                <view class="wa-col-33" bindtap="getlocat">
+                    <view class="text-center" style="display:flex;flex-direction:column;margin-top: 10px;margin-bottom: 10px;">
+                        <i class="fa fa-location-arrow" style="font-size: 50px;"/>
+                        <text style="margin-top: 10px;">位置</text>
+                    </view>
+                </view>
+                <view class="wa-col-33" bindtap="stopvoice">
+                    <view class="text-center" style="display:flex;flex-direction:column;margin-top: 10px;margin-bottom: 10px;">
+                        <i class="fa fa-file" style="font-size: 50px;"/>
+                        <text style="margin-top: 10px;">文件</text>
+                    </view>
+                </view>
+            </view>
+            <view class="wa-row">
+                <view class="wa-col-33" bindtap="takeVideo">
+                    <view class="text-center" style="display:flex;flex-direction:column;margin-top: 10px;margin-bottom: 10px;">
+                        <i class="fa fa-video-camera" style="font-size: 50px;"/>
+                        <text style="margin-top: 10px;">视频</text>
+                    </view>
+                </view>
+                <view class="wa-col-33" bindtap="takePicture">
+                    <view class="text-center" style="display:flex;flex-direction:column;margin-top: 10px;margin-bottom: 10px;">
+                        <i class="fa fa-camera-retro" style="font-size: 50px;"/>
+                        <text style="margin-top: 10px;">拍摄</text>
+                    </view>
+                </view>
+                <view class="wa-col-33" bindtap="stopvoice">
+                    <view class="text-center" style="display:flex;flex-direction:column;margin-top: 10px;margin-bottom: 10px;">
+                        <i class="fa fa-money" style="font-size: 50px;"/>
+                        <text style="margin-top: 10px;">红包</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

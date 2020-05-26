@@ -1,0 +1,29 @@
+<import src="/templates/question.wxml"/>
+<view class="search">
+  <view id="questions">
+      <!-- 问题列表-->
+      <view>
+          <!--嵌套模版-->
+          <block wx:for="{{questions}}" wx:for-item="question" wx:key="id">
+              <template is="question" data="{{question}}"/>
+          </block>
+      </view>
+  </view>
+</view>
+
+
+<view class="footer">
+
+	<view class="foo_select">
+		<view class="iconfont icon-fangwu"></view>
+		<text>发现</text>
+	</view>
+	<view id="camera" bindtap="goPublish">
+		<view class="iconfont icon-zhaoxiangji"></view>
+	</view>
+	<view  bindtap="goMe">
+		<view class="iconfont icon-touxiang"></view>
+		<text>我的</text>
+	</view>
+</view>
+

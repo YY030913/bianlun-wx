@@ -1,0 +1,11 @@
+<import src="/templates/user.wxml"/>
+
+<view class="users">
+  <!-- 问题列表-->
+  <view>
+      <!--嵌套模版-->
+      <block wx:for="{{users}}" wx:for-item="user" wx:key="id">
+          <template is="user" data="{{user}}"/>
+      </block>
+  </view>
+</view>

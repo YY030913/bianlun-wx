@@ -1,0 +1,140 @@
+<import src="/templates/suggestUser.wxml"/>
+<view class="header">
+    <image src="../../image/moments_bg.jpg" class="cover"></image><!---blur-->
+    <view class="user">
+        <view class="info">
+            <!--{{ userInfo.cover }}<view class="follower" bindtap="goFollow" data-type="follower" data-uid="{{uid}}">
+                <view class="count">{{ userInfo.followersCount }}</view>
+                粉丝
+            </view>-->
+            <image class="avatar border-2-ffffff" mode="aspectFill" src="{{ userInfo.avatar }}"></image>
+            <!--<view class="following" bindtap="goFollow" data-type="following" data-uid="{{uid}}">
+                <view class="count">{{ userInfo.followingsCount }}</view>
+            关注
+            </view>-->
+        </view>
+        <!--<view class="name">{{ userInfo.name }}</view>
+        <view class="introduction">{{ userInfo.introduction }}</view>-->
+    </view>
+</view>
+<view class="userinfo border-b-1">
+    <view class="row padding-10 spacebetween">
+        <view class="column">
+            <view class="name">
+                <text class="font-s-18">{{userInfo.name}}</text> <view wx:if="{{userInfo.gender == 'female'}}" class="fa-female fa margin-l-10"></view><view wx:else class="fa-male fa margin-l-10"></view>
+            </view>
+            <view class="location font-s-12 color-cccccc">
+                {{userInfo.location}}
+            </view>
+        </view>
+        <view class="row height-30 font-s-12">
+            <view class="width-50 center color-0a400a border-radius-5 border-1 center border-0a400a margin-r-5">
+                私信
+            </view>
+            <view class="width-100 center color-ffffff border-radius-5 border-1 center border-0a400a background-0a400a margin-r-5">
+                关注
+            </view>
+            <view class="width-30 border-radius-5 border-0a400a background-0a400a" bindtap="changeSuggestUser">
+                <view classs="fa fa-angle-down"></view>
+            </view>
+        </view>
+    </view>
+    <view class="column background-eeeeee padding-10 {{animation}} animated" style="display: {{showSuggestUser}}" >
+        <view class="color-cccccc font-s-14">
+            您可能感兴趣
+        </view>
+        <view class="scroll-x row spacebetween padding-t-10">
+            <block wx:for="{{suggestUser}}" wx:for-item="user" wx:key="id">
+                <template is="suggestUser" data="{{user}}"/>
+            </block>
+        </view>
+    </view>
+    
+    <view class="row padding-10 flex-start font-s-12 color-cccccc">
+        {{userInfo.introduction}}
+    </view>
+</view>
+<!--
+<view class="container">
+    <view class="left" bindtap="changeNav" data-index="0">
+        <text class="head_select">热点</text>
+    </view>
+    <view class="right" bindtap="changeNav" data-index="1">
+        <text>关注</text>
+    </view>
+</view>
+-->
+
+<view class="nav">
+    <view class="{{navIndex==0?'nav_select':''}}" bindtap="changeNav" data-index="0">参与的话题</view>
+    <view class="{{navIndex==1?'nav_select':''}}" bindtap="changeNav" data-index="1">关注的话题</view>
+</view>
+<view class="main">
+    <swiper bindchange="swiperChange" current="{{navIndex}}">
+        <swiper-item>
+            <scroll-view scroll-y class="iScroll" bindscrolltoupper="refresh" style="height:100%">
+                <view wx:for="{{List1}}" wx:for-item="part" wx:key="id" class="part">
+                    <view class="start">
+                        <view class="title">
+                            <text class="bubble-pop">12</text><text class="name">{{part.title}}</text>
+                        </view>
+                        <view style="display: flex;justify-content: flex-start;color: #dedede;font-size: 12px;margin-top: 5px;"> 
+                            <text style="margin-left: 10px;">{{part.participantCount}} 参与</text>
+                            <text style="margin-left: 10px;">{{part.followCount}} 关注</text>
+                        </view>
+                    </view>
+                    <view class="end">
+                        <!--<text wx:if="{{part.follow == true}}">取消关注</text>-->
+                    </view>
+                </view> 
+             </scroll-view>
+        </swiper-item>
+        <swiper-item>
+            <scroll-view scroll-y class="iScroll" bindscrolltoupper="refresh" style="height:100%">
+                <view wx:for="{{List2}}" wx:for-item="subject" wx:key="id" class="subject">
+
+                    <view class="start">
+                        <view class="title">
+                            <text class="bubble-pop">12</text>
+                            <text class="name">{{subject.title}}</text>
+                        </view>
+                        
+                        <view class="content">{{subject.debate}}</view>
+
+                        <view class="extra">
+                            <view style="display: flex;justify-content: flex-start;color: #dedede;font-size: 12px;margin-top: 5px;"> 
+                                <text style="margin-left: 10px;">{{subject.supportCount}} 支持</text>
+                                <text style="margin-left: 10px;">{{subject.replyCount}} 回复</text>
+
+                            </view>
+                            <view>
+                                <text class="cancleBtn" wx:if="{{subject.follow == true}}">取消关注</text>
+                            </view>
+                            
+                        </view>
+                    </view>
+                    <view class="end">
+                        
+                    </view>
+                </view> 
+             </scroll-view>
+        </swiper-item>
+    </swiper>
+</view>
+
+
+<view class="footer" style="display: {{showFooter}}">
+
+    <view bindtap="goHome">
+        <view class="iconfont icon-fangwu"></view>
+        <text>发现</text>
+    </view>
+    <view id="camera" bindtap="goPublish">
+        <view class="iconfont icon-zhaoxiangji"></view>
+    </view>
+    <view  class="foo_select">
+        <view class="iconfont icon-touxiang"></view>
+        <text>我的</text>
+    </view>
+</view>
+

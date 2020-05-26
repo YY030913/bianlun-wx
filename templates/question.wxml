@@ -1,0 +1,71 @@
+<!--
+  为问题列表提供相关模版
+  index: int
+  msg: string
+  time: string
+-->
+
+
+<template name="question">
+    <view class="question">
+        <view bindtap="goDetail" data-id="{{question.id}}">
+            <view class="question-title">{{question.title}}</view>
+            <view class="header-extra">{{question.createTime}}</view>
+            <view class="question-content">{{question.content}}</view>
+        </view>
+        <view class="width100">
+            <view class="question-pics" wx:if="{{question.thumbs.length == 1}}">
+                <block wx:for="{{question.thumbs}}" wx:for-item="pic" wx:key="id">
+                    <image class="one-pic-view" src="{{pic.src}}"/>
+                </block>
+            </view>
+            
+            <view class="question-pics" wx:elif="{{question.thumbs.length == 2}}">
+                <block wx:for="{{question.thumbs}}" wx:for-item="pic" wx:key="id">
+                    <image class="two-pic-view" src="{{pic.src}}"/>
+                </block>
+            </view>
+            <view class="question-pics" wx:else>
+                <block wx:for="{{question.thumbs}}" wx:for-item="pic" wx:key="id">
+                    <image class="more-pic-view" src="{{pic.src}}"/>
+                </block>
+            </view>
+        </view>
+
+        <view style="display: flex;justify-content: flex-start;color: #dedede;font-size: 12px;margin-top: 5px;"> 
+            <text style="margin-left: 10px;">{{question.participantCount}} 参与</text>
+            <text style="margin-left: 10px;">{{question.followCount}} 关注</text>
+        </view>
+
+
+        <view style="display: flex;margin-top: 10px;" bindtap="goUser" data-id="{{question.authorId}}">
+            <view class="avatar" style="margin-right: 10px;">
+                <image class="avatarImg" src="{{question.authorHead}}" />
+            </view>
+            <text class="question-respondent height-40">{{question.authorName}}  |  {{question.authorBio}}</text>
+        </view>
+        
+        <view class="question-answer">
+            
+            <view class="voice">
+                <view wx:if="{{question.price == 0}}" class="bubble bubble-blue">
+                    <view class="bubble-tail" style=""></view>
+                    <view class="wave3"></view>
+                    <view>免费</view>
+                </view>
+
+                <view wx:elif="{{question.priceCondition}}" class="bubble">
+                    <view class="bubble-tail"></view>
+                    <view class="wave3"></view>
+                    <view>{{question.priceConditionText}}</view>
+                </view>
+
+                <view wx:else class="bubble">
+                    <view class="bubble-tail"></view>
+                    <view class="wave3"></view>
+                    <view>¥ {{question.price}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

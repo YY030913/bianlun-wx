@@ -1,0 +1,162 @@
+.bold {
+	font-weight: 900;
+}
+.publish {
+	color: #000;
+	font-size: 16px;
+	background: #f3f3f3;
+	padding-bottom: 100px;
+}
+.article {
+	padding: 20px;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+}
+.location {
+	margin-left: 10px;
+	font-size: 14px;
+	color: #ccc;
+}
+.extra {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 20px;
+	line-height: 20px;
+}
+.location-view {
+	display: flex;
+}
+.line-item {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 5px 0;
+	align-items: flex-end;
+	height: 36px;
+	flex-wrap: wrap;
+}
+.line-item .label {
+	height: 36px;
+	line-height: 36px;
+}
+.line-item .fa-chevron-right {
+	height: 36px;
+	line-height: 36px;
+}
+.border-bottom {
+	border-bottom: 1px solid #f3f3f3;
+}
+.label {
+	color: #000;
+	margin-right: 20px;
+	font-size: 16px;
+}
+.fa-chevron-right:before {
+	font-size: 18px;
+	font-weight: 100;
+	color: #ccc;
+}
+.fa-circle-o {
+	margin-top: 3px;
+	margin-right: 5px;
+}
+.fa-circle {
+	color: #6cde2c;
+	margin-top: 3px;
+	margin-right: 5px;
+}
+.line-item .column {
+	margin-right: 40px;
+}
+.line-item .column .info {
+	color: #ccc;
+	font-size: 10px;
+}
+.title {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #dedede;
+	font-size: 14px;
+	line-height: 18px;
+	color: #000;
+}
+.border-1 {
+	border: 1px solid #dedede;
+}
+.text {
+	font-size: 14px;
+	color: #000;
+	margin-top: 20px;
+	line-height: 20px;
+	height: 100px !important;
+	width: 100%;
+}
+.fa-plus:before {
+    font-size: 36px;
+    color: #ccc;
+}
+.fa-location-arrow:before {
+	font-size: 14px;
+	colcor: #000;
+}
+.pics {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-end;
+	flex-wrap: wrap;
+}
+
+.pic-add {
+    margin-top: 10px;
+	margin-right: 10px;
+	padding: 18px;
+	border: 1ps solid #ccc;
+	background: #dedede;
+	width:34px;
+	height:34px;
+}
+.label-status {
+	display: flex;
+}
+.label-button {
+	background: #f3f3f3;
+	padding: 5px;
+}
+.label-button.active {
+	background: #f1d14a;
+}
+.activity-cate {
+	display: flex;
+	flex-direction: column;
+	font-size: 12px;
+	color: #333;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+.activity-cate view {
+	display: flex;
+}
+.cate-label {
+	margin-top: 10px;
+	padding: 10px;
+	color: #000;
+	font-size: 14px;
+	background: #fff;
+}
+.publish-button-view {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background: #f3f3f3;
+}
+.publish-button {
+	text-align: center;
+	color: #fff;
+	margin: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: #f1603a;
+}

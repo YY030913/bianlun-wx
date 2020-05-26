@@ -1,0 +1,13 @@
+<template name="suggestUser">
+    <view class="border-radius-5 border-1 padding-10 column width-150 margin-r-10 center background-ffffff">
+        <view class="avatar width-100 border-radius50">
+            <image class="width-100 height-100 border-radius50" src="{{user.avatar}}" />
+        </view>
+        <view class="font-s-16 center color-0a400a ellipsis width-120 margin-t-10">
+            {{user.name}}
+        </view>
+        <view class="border-radius-5 border-1 center border-0a400a width-120 margin-t-10">
+            关注
+        </view>
+    </view>
+</template>

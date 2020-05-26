@@ -1,0 +1,11 @@
+<import src="/templates/cate.wxml"/>
+
+<view class="cates">
+  <!-- 问题列表-->
+  <view>
+      <!--嵌套模版-->
+      <block wx:for="{{cates}}" wx:for-item="cate" wx:key="id">
+          <template is="cate" data="{{cate}}"/>
+      </block>
+  </view>
+</view>

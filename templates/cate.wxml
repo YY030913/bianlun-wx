@@ -1,0 +1,7 @@
+<template name="cate">
+    <view class="cate-item" bindtap="comfireCate" data-id='{{cate._id}}' data-cate="{{cate.name}}">
+        <view class="info">
+            <view class="name">{{cate.name}}</view>
+        </view>
+    </view>
+</template>

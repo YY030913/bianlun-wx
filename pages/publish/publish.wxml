@@ -1,0 +1,200 @@
+<import src="/templates/thumb.wxml"/>
+<import src="/templates/cate.wxml"/>
+
+<view class="mask" style="display: {{showMask}}" bindtap="cleartap">
+</view>
+<view class="publish">
+  <view class="article">
+    <input bindblur="bindTitleAreaBlur" placeholder="输入一个响亮的活动标题" auto-focus class="title"/>
+    <textarea class="text" bindblur="bindTextAreaBlur" auto-height placeholder="自动变高" auto-focus/>
+
+    
+    <view class="pics">
+      <!--嵌套模版-->
+      <block wx:for="{{thumbs}}" wx:for-item="thumb" wx:key="id">
+          <template is="thumb" data="{{thumb}}"/>
+      </block>
+      <view class="pic-add fa fa-plus"></view>
+    </view>
+    <view class="extra margin-t-20">
+      <view class="location-view fa fa-location-arrow">
+        <view wx:if="{{region == ''}}">
+          <picker mode="region" bindchange="bindRegionChange" value="{{region}}">
+            <view class="picker">
+              <text class="location">所在地</text>
+            </view>
+          </picker>
+        </view>
+        <view wx:else>
+          <picker mode="region" bindchange="bindRegionChange" value="{{region}}">
+            <view class="picker">
+              <text class="location">{{region[0]}} {{region[1]}} {{region[2]}}</text>
+            </view>
+          </picker>
+        </view>
+        
+      </view>
+      <label class="color-cccccc label-status" for="{{item.name}}" bindtap="changePublicStatus"><view class="fa-circle-o fa" style="display: {{showPrivate}}"></view><view class="fa-circle fa" style="display: {{showPpublic}}"></view><text>公开</text></label>
+    </view>
+    
+  </view>
+
+  <view class="article margin-t-20">
+    <view class="line-item border-bottom" bindtap="changeDestination">
+      <view wx:if="{{webDestination == true && destination == ''}}">
+        <text class="label">活动地址</text>
+      </view>
+      <view wx:elif="{{webDestination == false && destinationRegion == ''}}">
+        <text class="label">活动地址</text>
+      </view>
+      <view wx:else class="column">
+        <text style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;width: 100%;">{{destinationRegion[0]}}{{destinationRegion[1]}}{{destinationRegion[2]}}{{destination}}</text>
+        <text class="info">活动地址</text>
+      </view>
+      <text class="fa fa-chevron-right"></text>
+    </view>
+    <view class="line-item border-bottom">
+      <view wx:if="{{date == ''}}" class="label">
+        <picker mode="date" value="{{date}}" start="{{starDate}}" end="{{endDate}}" bindchange="bindDateChange">
+          <view class="picker">
+            辩论开始日期: {{date}}
+          </view>
+        </picker>
+      </view>
+      
+      <view wx:else class="column">
+        <picker mode="date" value="{{date}}" start="{{starDate}}" end="{{endDate}}" bindchange="bindDateChange">
+          <view class="picker">
+            {{date}}
+          </view>
+        </picker>
+        <text class="info">辩论开始日期</text>
+      </view>
+      <text class="fa fa-chevron-right"></text>
+    </view>
+    <view class="line-item border-bottom">
+      <view wx:if="{{time == ''}}" class="label">
+        <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+          <view class="picker">
+            辩论开始时间: {{time}}
+          </view>
+        </picker>
+      </view>
+      
+      <view wx:else class="column">
+        <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+          <view class="picker">
+            {{time}}
+          </view>
+        </picker>
+        <text class="info">辩论开始时间</text>
+      </view>
+      <text class="fa fa-chevron-right"></text>
+    </view>
+    <view class="line-item border-bottom" bindtap="changePrice">
+      <text wx:if="{{price == ''}}" class="label">收听费用</text>
+      <view wx:elif="{{price == 0}}" class="column">
+        <text>免费</text>
+        <text class="info">收听费用</text>
+      </view>
+      <view wx:else class="column">
+        <text>¥ {{price}}</text>
+        <text class="info">收听费用</text>
+      </view>
+      <text class="fa fa-chevron-right"></text>
+    </view>
+    <view class="line-item">
+      <text class="label">辩论形式</text>
+      <block wx:for="{{formates}}" wx:for-item="formate" wx:key="id">
+          <text class="label-button {{actvieFormate}}" bindtap="confirmFormate" data-id="{{formate._id}}">{{formate.name}}</text>
+      </block>
+    </view>
+  </view>
+  <view style="display: {{showBottomModalOfDestination}}" class="bottomModal animated {{animation}}">
+    <view class="modal-body">
+      <view style="display: {{showNotOnNet}}">
+        <view class="info">线下活动地址</view>
+        <picker mode="region" class="height-40" bindchange="bindDestinationRegionChange" value="{{destinationRegion}}">
+          <view class="picker">
+              <text wx:if="{{destinationRegion == ''}}" class="label">省份 城市 区县</text>
+              <text wx:else class="label">{{destinationRegion[0]}} {{destinationRegion[1]}} {{destinationRegion[2]}}</text>
+          </view>
+        </picker>
+        
+        <input class="border-b-1 height-40" bindblur="bindDestinationTextAreaBlur" auto-height placeholder="自动变高"/>
+        <!-- 选择地址 -->
+      </view>
+      <view class="row margin-t-20 spacebetween">
+        <label class="color-cccccc label-status" for="{{item.name}}" bindtap="changOnNetStatus"><view class="fa-circle-o fa" style="display: {{showNotOnNet}}"></view><view class="fa-circle fa" style="display: {{showOnNet}}"></view><text>网上活动</text></label>
+        <text class="confirm-button" bindtap="confirmDestination">确认</text>
+      </view>
+    </view>
+  </view>
+  <view style="display: {{showBottomModalOfPrice}}" class="bottomModal animated {{animation}}">
+    <view class="row flex-start padding-t-10 padding-l-10 padding-r-10">
+      <view class="width100 padding-t-5 padding-b-5 spacebetween row">
+        <view>
+          <text class="black font-s-14">价格：</text>
+          <text class="black bold margin-l-10">¥ {{tmpPrice}}</text>
+        </view>
+        <view>
+          <label class="color-cccccc label-status" for="{{item.name}}" bindtap="changFreepriceStatus"><view class="fa-circle-o fa" style="display: {{showNotFreePrice}}"></view><view class="fa-circle fa" style="display: {{showFreePrice}}"></view><text>免费</text></label>
+        </view>
+      </view>
+      
+    </view>
+    <view class="row border-t-1">
+      <view class="col-3 column">
+      <view class="row">
+        <view class="border-r-1 height100 width100 center padding-10" bindtap="makePrice" data-val="1"><text class="center">1</text></view>
+        <view class="border-r-1 height100 width100 center padding-10" bindtap="makePrice" data-val="2"><text class="center">2</text></view>
+        <view class="border-r-1 height100 width100 center padding-10" bindtap="makePrice" data-val="3"><text class="center">3</text></view>
+      </view>
+      <view class="row">
+        <view class="border-t-1 border-r-1 height100 width100 center padding-10" bindtap="makePrice" data-val="4"><text class="center">4</text></view>
+        <view class="border-t-1 border-r-1 height100 width100 center padding-10" bindtap="makePrice" data-val="5"><text class="center">5</text></view>
+        <view class="border-t-1 border-r-1 height100 width100 center padding-10" bindtap="makePrice" data-val="6"><text class="center">6</text></view>
+      </view>
+      <view class="row">
+        <view class="border-t-1 border-r-1 height100 width100 center padding-10" bindtap="makePrice" data-val="7"><text class="center">7</text></view>
+        <view class="border-t-1 border-r-1 height100 width100 center padding-10" bindtap="makePrice" data-val="8"><text class="center">8</text></view>
+        <view class="border-t-1 border-r-1 height100 width100 center padding-10" bindtap="makePrice" data-val="9"><text class="center">9</text></view>
+      </view>
+      <view class="row">
+        <view class="border-t-1 border-r-1 border-b-1 height100 width100 center padding-10" bindtap="makePrice" data-val="."><text class="center">.</text></view>
+        <view class="border-t-1 border-r-1 border-b-1 height100 width100 center padding-10" bindtap="makePrice" data-val="0"><text class="center">0</text></view>
+        <view class="border-t-1 border-r-1 border-b-1 height100 width100 center padding-10"><view class="delte height100 center padding10 margin20" bindtap="changePrice">
+          <view class="fa-eye-slash fa"></view>
+        </view></view>
+      </view>
+      </view>
+      <view class="column col-1">
+        <view class="delte center col-1" bindtap="backPrice">
+          <view class="fa-eraser fa"></view>
+        </view>
+        <view class="backspace center col-1" bindtap="trashPrice">
+          <view class="fa-trash-o fa"></view>
+        </view>
+        
+        <view class="button col-1 center" bindtap="confirmPrice"><text>确认</text></view>
+      </view>
+    </view>
+    <view class="modal-body row spacebetween">
+    </view>
+  </view>
+  <view class="activity-cate" bindtap="changeCate">
+    <view>活动分类：</view>
+    <view><text class="cate-label">{{cate}}</text></view>
+  </view>
+  <view class="publish-button-view">
+    <view class="publish-button" bindtap="publishDebate">确定发布</view>
+  </view>
+  <view class="full-page" style="display: {{showCate}}">
+    <view>
+        <!--嵌套模版-->
+        <block wx:for="{{cates}}" wx:for-item="cate" wx:key="id">
+            <template is="cate" data="{{cate}}"/>
+        </block>
+    </view>
+  </view>
+</view>

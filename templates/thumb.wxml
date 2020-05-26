@@ -1,0 +1,17 @@
+<!--
+  图片缩略图
+  index: int
+  msg: string
+  time: string
+-->
+<template name="thumb">
+    <view class="thumb-item">
+        
+        <view style="display: flex;" bindtap="goUser" data-id="{{thumb.id}}">
+            <image class="thumb-img" src="{{thumb.src}}" />
+        </view>
+        <view class="close fa fa-close" bindtap="delThumb" data-id="{{thumb.id}}">
+        </view>
+        <view class="thumb-label">主图</view>
+    </view>
+</template>

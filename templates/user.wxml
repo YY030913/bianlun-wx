@@ -1,0 +1,17 @@
+<template name="user">
+    <view class="user-item">
+        <view class="start">
+            <view class="avatar" style="margin-right: 10px;">
+                <image class="avatarImg" src="{{user.avatar}}" />
+            </view>
+            <view class="info">
+                <view class="name">{{user.name}}</view>
+                <view class="introduction">{{user.introduction}}</view>
+            </view>
+        </view>
+        <view class="end">
+            <text wx:if="{{user.follow == true}}">取消关注</text>
+        </view>
+        
+    </view>
+</template>

@@ -1,0 +1,19 @@
+{
+  "pages":[
+    
+    "pages/user/user",
+    "pages/detail/detail",
+    "pages/list/list",
+    "pages/publish/publish",
+    "pages/cate/cate",
+    "pages/userlist/userlist"
+    
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "以辩论英雄",
+    "navigationBarTextStyle":"black"
+  }
+  
+}
